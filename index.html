@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saleh Mohamed's Portfolio</title>
+  
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Base */
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Offset for fixed navbar */
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      /* AI Background from file */
+      background-image: url('./Gemini_Generated_Image_sydp5ysydp5ysydp.jpg');
+      background-color: #071029;
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #fff;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navbar */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 15px 20px;
+        z-index: 1000;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box; /* Ensures padding is included in the width */
+    }
+    .navbar.scrolled {
+        background-color: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .nav-logo {
+        flex-shrink: 0; /* Prevents the logo from shrinking */
+    }
+    .nav-logo a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 25px;
+    }
+    .nav-links a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.2s;
+        position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active {
+        color: #38bdf8;
+    }
+     .nav-links a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #38bdf8;
+    }
+
+
+    /* Container */
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 20px;
+      position: relative;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1 { font-size: 2.8rem; margin: 0; font-weight: 700; }
+    h2 { font-size: 1.5rem; margin: 12px 0 6px 0; color: #cbd5e1; font-weight: 600; }
+    h3 { font-size: 1.4rem; margin-bottom: 1rem; color: #e2e8f0;}
+
+    /* New style for section titles */
+    section h2 {
+        font-size: 2.2rem; /* Increased font size */
+        font-weight: 700;
+        color: #e2e8f0; /* A bright, but not colored text */
+        text-shadow: 0 0 8px rgba(56, 189, 248, 0.4), 0 0 20px rgba(56, 189, 248, 0.3); /* The glowing effect */
+        margin-bottom: 2.5rem; /* More space for emphasis */
+        position: relative;
+        padding-bottom: 0.75rem; /* Space for the line */
+        display: inline-block; /* Keep the underline constrained to text width */
+    }
+
+    /* Underline for section titles */
+    section h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px; /* Width of the underline */
+        height: 3px; /* Thickness */
+        background-color: #38bdf8; /* Highlight color for the line */
+        border-radius: 2px;
+        box-shadow: 0 0 12px rgba(56, 189, 248, 0.7); /* Glowing effect for the line */
+    }
+
+    .highlight { 
+        color: #38bdf8;
+        text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+    .usp { color: #94a3b8; margin-top: 12px; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;}
+
+    /* Hero buttons */
+    .hero-buttons { margin-top: 24px; }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 28px;
+      background: #2563eb;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(37,99,235,0.3), 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #38bdf8;
+      color: #38bdf8;
+    }
+
+    /* Content areas */
+    p { line-height: 1.8; color: #cbd5e1; font-size: 1.1rem; }
+    .muted { color: #e2e8f0; } /* Changed for better visibility */
+
+    /* Education & Training Cards */
+    .card-container {
+        max-width: 700px; /* Adjusted width */
+        margin: 2rem auto 0 auto;
+    }
+    .info-card {
+        background: rgba(10, 18, 35, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid #1e293b;
+        border-radius: 12px;
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text content */
+        gap: 1.5rem; /* Space between logo and text */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden; /* Important for the new about-me-card design */
+    }
+    .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    .info-logo img {
+        max-width: 220px; /* Further Increased DEPI logo size */
+        border-radius: 12px;
+        padding: 5px;
+    }
+    #education .info-logo img {
+        max-width: 140px; /* Keep Assiut logo size the same */
+    }
+    .info-details h3 {
+        margin: 0 0 0.5rem 0;
+        color: #e2e8f0;
+        font-size: 1.4rem;
+    }
+    .info-details .meta-text {
+        margin: 0 0 1rem 0;
+        color: #38bdf8;
+        font-weight: 600;
+        font-size: 1.15rem;
+    }
+    .info-details p {
+        margin: 0;
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+    
+    /* About Me Card Specifics - NEW DESIGN */
+    .about-me-card {
+        padding: 0;
+        flex-direction: row;
+        align-items: stretch; /* Make children stretch to full height */
+        gap: 0;
+    }
+    .profile-photo-container {
+        width: 220px;
+        flex-shrink: 0;
+        background-image: url('./profile-picture.jpg');
+        background-size: cover;
+        background-position: center;
+        border-right: 1px solid #1e293b;
+    }
+    .about-me-text {
+        padding: 2.5rem;
+        text-align: left;
+    }
+    .about-me-text p {
+        margin: 0;
+    }
+
+
+    /* Projects */
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+        text-align: left;
+    }
+    .project-card {
+        background: rgba(10, 18, 35, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid #1e293b;
+        border-radius: 12px;
+        padding: 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 8px 24px rgba(2,6,23,0.4);
+    }
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
+    }
+    .project-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 1rem;
+        color: #38bdf8;
+    }
+    .project-card .tags {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .project-card .tag {
+        background: #1e293b;
+        color: #94a3b8;
+        padding: 0.3rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    /* Interests - FLOAT-BASED DESIGN */
+    
+.hobby-card {
+    background: rgba(10, 18, 35, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: left;
+    margin-top: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden; /* علشان يحتوي الفلوت */
+}
+
+.hobby-icon {
+    width: 250px;
+    height: auto;   /* خليه auto بدل fixed height */
+    float: left;    /* الصورة على الشمال */
+    margin-right: 2.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.hobby-icon img {
+    width: 100%;
+    height: auto;   /* الصورة تاخد حجمها الطبيعي */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.hobby-details {
+    display: block; /* النص يبقى بلوك عادي */
+}
+
+    .hobby-main-text p {
+      margin-bottom: 1.5rem; /* Space between paragraph and tags */
+    }
+    .other-hobbies {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+    .other-hobbies span {
+        background: #1e293b;
+        color: #94a3b8;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+
+    /* Contact - NEW DESIGN */
+    .contact-card {
+        max-width: 700px;
+        margin: 2rem auto 0 auto;
+    }
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    .contact-item {
+        background: rgba(20, 31, 49, 0.8);
+        backdrop-filter: blur(10px);
+        border: 1px solid #334155;
+        border-radius: 10px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+        color: #cbd5e1;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .contact-item:hover {
+        background-color: #334155;
+        transform: translateY(-5px);
+        color: #fff;
+    }
+    .contact-item svg {
+        width: 32px;
+        height: 32px;
+        color: #38bdf8;
+        flex-shrink: 0;
+    }
+    .contact-item span {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+
+    /* Skills Section */
+    .skills-grid {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    .skill-category-card {
+        background: rgba(10, 18, 35, 0.9);
+        backdrop-filter: blur(10px);
+        border: 1px solid #1e293b;
+        border-radius: 12px;
+        padding: 1.5rem 2rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        flex-basis: 280px;
+        flex-grow: 1;
+        max-width: 350px;
+        text-align: left;
+    }
+     .skill-category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+    }
+    .skill-category-card h3 {
+        color: #38bdf8;
+        margin-top: 0;
+        border-bottom: 2px solid #1e293b;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .skill-category-card ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .skill-category-card li {
+        color: #cbd5e1;
+        margin-bottom: 0.75rem;
+        font-size: 1.05rem;
+        display: flex;
+        align-items: center;
+    }
+    .skill-category-card li::before {
+        content: '✓';
+        color: #38bdf8;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    /* Footer */
+    footer { background: #071428; padding: 20px; margin-top: 40px; color:#94a3b8; }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      .nav-links { display: none; } 
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.3rem; }
+      .hero { height: auto; padding: 120px 0 80px 0; }
+      .project-card { padding: 1.5rem; }
+      .about-me-card {
+          flex-direction: column;
+      }
+      .profile-photo-container {
+        width: 100%;
+        height: 250px; /* Give a fixed height on mobile */
+        border-right: none;
+        border-bottom: 1px solid #1e293b;
+      }
+      .about-me-text {
+        text-align: center;
+      }
+      
+.hobby-card {
+    background: rgba(10, 18, 35, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: left;
+    margin-top: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden; /* علشان يحتوي الفلوت */
+}
+
+.hobby-icon {
+    width: 250px;
+    height: auto;   /* خليه auto بدل fixed height */
+    float: left;    /* الصورة على الشمال */
+    margin-right: 2.5rem; 
+    margin-bottom: 1rem; 
+}
+
+.hobby-icon img {
+    width: 100%;
+    height: auto;   /* الصورة تاخد حجمها الطبيعي */
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.hobby-details {
+    display: block; /* النص يبقى بلوك عادي */
+}
+
+      .other-hobbies {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><a href="#">Saleh M.</a></div>
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="info-card">
+        <h1>Hi, I'm <span class="highlight">Saleh Mohamed</span></h1>
+        <h2><span id="typed"></span></h2>
+        <p class="usp">Passionate Android Developer leveraging Kotlin and modern tools to craft scalable, user-friendly apps—where performance meets design.</p>
+        <div class="hero-buttons">
+          <a href="#about" class="btn">Learn More About Me</a>
+          <a href="Saleh_MohaMohamed_CV1.pdf" target="_blank" class="btn btn-outline">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" data-aos="fade-up">
+    <div class="container">
+      <h2>About Me</h2>
+      <div class="card-container">
+        <div class="info-card about-me-card">
+          <div class="profile-photo-container"></div>
+          <div class="about-me-text">
+            <p>
+              As a dedicated Computer Science student, I discovered my passion for mobile development early in my academic journey. I'm particularly drawn to the Android ecosystem, where I can build intuitive and high-performance applications that impact users' daily lives. My focus is on writing clean, efficient code with Kotlin and Java, and I'm driven by the challenge of turning innovative ideas into reality on the mobile screen. 🚀
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="education" data-aos="fade-left">
+    <div class="container">
+      <h2>Education</h2>
+      <div class="card-container">
+        <div class="info-card">
+          <div class="info-logo">
+            <img src="./assuit_logo.png" alt="Assiut University Logo">
+          </div>
+          <div class="info-details">
+            <h3>Faculty of Computers and Information</h3>
+            <p class="meta-text">Assiut University</p>
+            <p>Expected Graduation: 2026 | Cumulative GPA: 3.47</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" data-aos="fade-right">
+    <div class="container">
+      <h2>My Technical Skills</h2>
+      <p class="muted">A snapshot of the technologies I use to build modern Android applications.</p>
+      <div class="skills-grid">
+        <div class="skill-category-card" data-aos="fade-up" data-aos-delay="100">
+          <h3>Core Mobile</h3>
+          <ul>
+            <li>Kotlin</li>
+            <li>Java</li>
+            <li>Android SDK</li>
+            <li>XML Layouts</li>
+            <li>Material Design</li>
+          </ul>
+        </div>
+        <div class="skill-category-card" data-aos="fade-up" data-aos-delay="200">
+          <h3>Architecture & Libraries</h3>
+          <ul>
+            <li>MVVM Architecture</li>
+            <li>Jetpack Components</li>
+            <li>Kotlin Coroutines</li>
+            <li>Room Database</li>
+            <li>Retrofit & RESTful APIs</li>
+          </ul>
+        </div>
+        <div class="skill-category-card" data-aos="fade-up" data-aos-delay="300">
+          <h3>Backend & Tools</h3>
+          <ul>
+            <li>Firebase</li>
+            <li>MySQL / SQL</li>
+            <li>Git & GitHub</li>
+            <li>Android Studio</li>
+            <li>JSON</li>
+          </ul>
+        </div>
+        <div class="skill-category-card" data-aos="fade-up" data-aos-delay="400">
+          <h3>Professional Skills</h3>
+          <ul>
+            <li>Problem-Solving</li>
+            <li>Teamwork & Collaboration</li>
+            <li>Agile Methodologies</li>
+            <li>Effective Communication</li>
+            <li>Adaptability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="training" data-aos="zoom-in">
+    <div class="container">
+      <h2>Training & Courses</h2>
+       <div class="card-container">
+        <div class="info-card">
+          <div class="info-logo">
+            <img src="./depi_logo.png" alt="DEPI Logo">
+          </div>
+          <div class="info-details">
+            <h3>Digital Egypt Pioneers Initiative (DEPI)</h3>
+            <p class="meta-text">Android Developer Track | Round 3</p>
+            <p>A comprehensive program covering Android fundamentals, modern UI/UX design principles, and building robust, scalable apps using Jetpack components. The curriculum includes hands-on experience with Firebase for backend services. Alongside technical training, the initiative sharpens essential soft skills, including effective communication and teamwork, and provides a dedicated course on freelancing to prepare pioneers for the global market.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="muted">Here are some projects I've worked on to apply what I've learned.</p>
+      <div class="projects-grid">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+          </svg>
+          <h3>Paint Brush Application</h3>
+          <p>A desktop drawing tool built with Java Swing, allowing users to draw lines, rectangles, ovals, and freehand shapes, with features like color selection and basic drawing tools.</p>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">Java Swing</span>
+            <span class="tag">Desktop App</span>
+          </div>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <svg class="project-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l.383-1.437M7.5 14.25 5.106 5.165A2.25 2.25 0 0 0 2.869 3H2.25" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          </svg>
+          <h3>Supermarket Management System</h3>
+          <p>A relational database developed using MySQL to manage products, customers, suppliers, and sales. Applied SQL queries and normalization techniques for efficient data storage.</p>
+          <div class="tags">
+            <span class="tag">MySQL</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Database</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="interests" data-aos="fade-up">
+    <div class="container">
+      <h2>Interests & Hobbies</h2>
+      <p class="muted">Beyond the code, my hobbies sharpen my creative and problem-solving skills.</p>
+      <div class="hobby-card" data-aos="fade-right">
+        <div class="hobby-icon">
+            <img src="./gaming-hobby.jpg" alt="Persistence in Gaming and Development">
+        </div>
+        <div class="hobby-details">
+            
+
+<div class="hobby-main-text">
+    <h3>Gaming as a Lesson in Persistence</h3>
+    <p>
+        Gaming isn't just entertainment; it's a way to build persistence and focus. 
+        Challenging titles like Dark Souls and Hollow Knight show that failure is only a step towards growth. 
+        Every retry teaches patience, strategy, and problem-solving — the same skills I apply when debugging code 
+        or designing Android apps. This mindset keeps me pushing forward until I reach the best solution.
+    </p>
+</div>
+
+
+            </div>
+            <div class="other-hobbies">
+                <span>🎧 Music (Alan Walker)</span>
+                <span>📚 Reading (Manhwa & Manga)</span>
+                <span>🎬 Anime</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <div class="container">
+      <h2>Let's Connect</h2>
+      <p class="muted">Feel free to reach out. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+      <div class="contact-card">
+        <div class="contact-grid">
+          <a href="mailto:saleh.mohamed.cs@gmail.com" class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+            <span>Email</span>
+          </a>
+          <a href="https://www.linkedin.com/in/salehmohamed2" target="_blank" class="contact-item">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+           <a href="https://github.com/salehmohamed45" target="_blank" class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" fill="currentColor"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3.3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-23.3 2.6-57.4 0 0 21.9-7.8 72.2 26.7 20.9-6.1 43.6-9.2 66.2-9.2 22.6 0 45.3 3.1 66.2 9.2 50.3-34.5 72.2-26.7 72.2-26.7 13.7 34.1 5.2 50.9 2.6 57.4 16 17.6 23.6 31.4 23.6 58.9 0 96.5-56.4 104.2-112.6 110.2 9.2 7.8 17.3 23.2 17.3 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+            <span>GitHub</span>
+          </a>
+           <a href="tel:+2001095904812" class="contact-item">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+            <span>Phone</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Copyright © <span id="year"></span> Saleh Mohamed | Android Developer</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Typed.js
+    var typed = new Typed('#typed', {
+      strings: ["Android Developer 🚀", "Kotlin & Java Enthusiast 💻", "CS Student | Assiut University"],
+      typeSpeed: 70,
+      backSpeed: 40,
+      loop: true
+    });
+    
+    // AOS Init - Improved Easing
+    AOS.init({ 
+        duration: 800, 
+        once: true,
+        offset: 100,
+        easing: 'ease-in-out-sine',
+    });
+
+    // Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar Scroll Effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Active Nav Link on Scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+  </script>
+</body>
+</html>
